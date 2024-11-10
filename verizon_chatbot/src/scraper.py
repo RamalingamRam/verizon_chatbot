@@ -67,8 +67,24 @@ class VerizonScraper:
                 
                 print("_____ START SNIPPET _________")
                 print(snippet_text)
-                print("_____ STOP SNIPPET _________")
+                print("_____ STOP SNIPPET _________\n")
 
+                # url_text = result.find('a', class_='page-link lia-link-navigation lia-custom-event', href_=True)
+                # tags = soup.select("a.page-link.lia-link-navigation.lia-custom-event[href]")
+
+                link = result.find('a', class_='page-link lia-link-navigation lia-custom-event')
+                href = link['href']
+
+                # Remove the query parameters
+                cleaned_href = href.split('?')[0]
+
+                # Prepend the base URL
+                url_text = f"https://community.verizon.com{cleaned_href}"
+
+                print("\n_____ START URL _________")
+                print(url_text)
+                print("_____ STOP URL _________")
+               
                 # tt = result.find_all('span', class_='lia-search-match-lithium')
 
                 # for title in result.find_all('span', class_='lia-search-match-lithium'):
@@ -78,11 +94,11 @@ class VerizonScraper:
                 # snippet = result.find('span', class_='lia-truncated-body-container').text.strip()
                 # url = result.find('a', class_='page-link lia-link-navigation lia-custom-event')['href']
                 
-                # results.append({
-                #     'title': title_text,
-                #     'snippet': snippet_text,
-                #     'url': url
-                # })
+                results.append({
+                    'title': title_text,
+                    'snippet': snippet_text,
+                    'url': url_text
+                })
                 results.append({
                     'Message': result
                 })
