@@ -40,7 +40,7 @@ class VerizonScraper:
                 # title = result.find_all(attrs={'class': 'lia-search-match-lithium'})
 
                 title_text = ''
-                for title in  result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium']):
+                for title in result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium']):
                     title_text += title.get_text() + ' '
                     
                 title_text = title_text.strip()
@@ -48,10 +48,25 @@ class VerizonScraper:
                 print(title_text)
                 print("_____ STOP TITLE _________")
                 
-                snippet = result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium lia-search-match-lithium'])
-                snippet = snippet.get_text().strip()
+                snippet_text = ''
+                # st = result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium lia-search-match-lithium'])
+                # '<br/>'.join([str(tag) for tag in table])
+                
+                st = result.find_all('div', class_='lia-truncated-body-container')
+                tags = '<br/>'.join([str(tag) for tag in st])
+                snippet_soup = BeautifulSoup(tags, 'html.parser')
+                snippet_text = snippet_soup.get_text().strip()
+
+                # snippets = snippet_soup.find_all('span', class_='lia-search-match-lithium lia-search-match-lithium')
+                # snippet_text = snippets.get_text().strip()
+
+                # for snippet in result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium lia-search-match-lithium']):
+                #     snippet_text += snippet.get_text() + ' '
+
+                # snippet_text = snippet_text.strip()
+                
                 print("_____ START SNIPPET _________")
-                print(snippet)
+                print(snippet_text)
                 print("_____ STOP SNIPPET _________")
 
                 # tt = result.find_all('span', class_='lia-search-match-lithium')
@@ -65,7 +80,7 @@ class VerizonScraper:
                 
                 # results.append({
                 #     'title': title_text,
-                #     'snippet': snippet,
+                #     'snippet': snippet_text,
                 #     'url': url
                 # })
                 results.append({
