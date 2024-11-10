@@ -27,7 +27,8 @@ class ClaudeChatHandler:
             # Get response from Claude
             response = self.client.messages.create(
                 model="claude-3-sonnet-20240229",
-                max_tokens=1024,
+                max_tokens=124,
+                temperature=0,
                 messages=[
                     {
                         "role": "user",
