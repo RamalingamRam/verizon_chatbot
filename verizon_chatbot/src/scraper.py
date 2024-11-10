@@ -30,18 +30,30 @@ class VerizonScraper:
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             results = []
             
-            for result in soup.find_all('div', class_='search-result'):
-                title = result.find('h3').text.strip()
-                snippet = result.find('div', class_='search-snippet').text.strip()
-                url = result.find('a')['href']
+            # result = soup.find_all('div', class_='lia-quilt lia-quilt-message-search-item lia-quilt-layout-list-item')
+            # print(result.get_text())
+
+            for result in soup.find_all('div', class_='lia-quilt lia-quilt-message-search-item lia-quilt-layout-list-item'):
+                print(result.get_text().strip())
+                # tt = result.find_all('span', class_='lia-search-match-lithium')
+
+                # for title in result.find_all('span', class_='lia-search-match-lithium'):
+                #     # msg_title = title.get_text()
+                #     print(title.text.strip())
+                # title = result.find('span', class_='lia-search-match-lithium').text.strip()
+                # snippet = result.find('span', class_='lia-truncated-body-container').text.strip()
+                # url = result.find('a', class_='page-link lia-link-navigation lia-custom-event')['href']
                 
+                # results.append({
+                #     'title': msg_title,
+                #     'snippet': snippet,
+                #     'url': url
+                # })
                 results.append({
-                    'title': title,
-                    'snippet': snippet,
-                    'url': url
+                    'Message': result
                 })
             
-            return results[:5]  # Return top 5 results
+            return results[:]  # Return top 5 results
             
         except Exception as e:
             logging.error(f"Error searching community: {str(e)}")
