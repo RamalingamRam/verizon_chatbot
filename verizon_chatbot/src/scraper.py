@@ -99,9 +99,9 @@ class VerizonScraper:
                     'snippet': snippet_text,
                     'url': url_text
                 })
-                results.append({
-                    'Message': result
-                })
+                # results.append({
+                #     'Message': results
+                # })
             
             return results[:]  # Return top 5 results
             
