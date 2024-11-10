@@ -34,7 +34,26 @@ class VerizonScraper:
             # print(result.get_text())
 
             for result in soup.find_all('div', class_='lia-quilt lia-quilt-message-search-item lia-quilt-layout-list-item'):
-                print(result.get_text().strip())
+                # print(result.get_text().strip())
+
+                # title = result.find_all('span', class_='lia-search-match-lithium').get_text().strip()
+                # title = result.find_all(attrs={'class': 'lia-search-match-lithium'})
+
+                title_text = ''
+                for title in  result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium']):
+                    title_text += title.get_text() + ' '
+                    
+                title_text = title_text.strip()
+                print("_____ START TITLE _________")
+                print(title_text)
+                print("_____ STOP TITLE _________")
+                
+                snippet = result.find_all(lambda tag: tag.name == 'span' and tag.get('class') == ['lia-search-match-lithium lia-search-match-lithium'])
+                snippet = snippet.get_text().strip()
+                print("_____ START SNIPPET _________")
+                print(snippet)
+                print("_____ STOP SNIPPET _________")
+
                 # tt = result.find_all('span', class_='lia-search-match-lithium')
 
                 # for title in result.find_all('span', class_='lia-search-match-lithium'):
@@ -45,7 +64,7 @@ class VerizonScraper:
                 # url = result.find('a', class_='page-link lia-link-navigation lia-custom-event')['href']
                 
                 # results.append({
-                #     'title': msg_title,
+                #     'title': title_text,
                 #     'snippet': snippet,
                 #     'url': url
                 # })
