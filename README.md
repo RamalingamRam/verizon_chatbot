@@ -23,3 +23,8 @@ Clude model "claude-3-sonnet-20240229" is used here for RAG.
 ## Display the results
 
 Provide a single accurate, most relevant and summarized answer for the user question. If it is not satisfactorily answer the user question then give specific instructions to post a question in Verizon community for community help or direct conact to Verizon customer service for further assistance.
+
+## TODO
+
+- Improve output presentaion
+- In scraper.py/search_communitnse() input msg_title, snippet, url to results.append need fix.
