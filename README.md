@@ -37,5 +37,3 @@ curl --location 'http://127.0.0.1:8000/chat' \
 - Improve output presentaion
 - In scraper.py/search_communitnse() input msg_title, snippet, url to results.append need fix.
 - How setup and run the project
-
-## soup
